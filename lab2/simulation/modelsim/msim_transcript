@@ -1,0 +1,124 @@
+# Reading C:/intelFPGA_lite/17.0/modelsim_ase/tcl/vsim/pref.tcl
+# do top_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/17.0/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:35 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv 
+# -- Compiling module top
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 20:01:35 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/reg_file.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:35 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/reg_file.sv 
+# -- Compiling module reg_file
+# 
+# Top level modules:
+# 	reg_file
+# End time: 20:01:35 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder32.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:35 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder32.sv 
+# -- Compiling module fulladder32
+# -- Compiling module fulladder32_testbench
+# 
+# Top level modules:
+# 	fulladder32_testbench
+# End time: 20:01:35 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:35 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder.sv 
+# -- Compiling module fulladder
+# -- Compiling module fulladder_testbench
+# 
+# Top level modules:
+# 	fulladder_testbench
+# End time: 20:01:35 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/dmem.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:36 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/dmem.sv 
+# -- Compiling module dmem
+# 
+# Top level modules:
+# 	dmem
+# End time: 20:01:36 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/arm.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:36 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/arm.sv 
+# -- Compiling module arm
+# 
+# Top level modules:
+# 	arm
+# End time: 20:01:36 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/alu.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:36 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/alu.sv 
+# -- Compiling module alu
+# 
+# Top level modules:
+# 	alu
+# End time: 20:01:36 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/ee469/lab2 {C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 20:01:36 on Apr 20,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/Aaron Hong/Documents/ee469/lab2" C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv 
+# -- Compiling module imem
+# 
+# Top level modules:
+# 	imem
+# End time: 20:01:36 on Apr 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+vsim work.testbench
+# vsim work.testbench 
+# Start time: 20:01:39 on Apr 20,2023
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.reg_file
+# Loading work.alu
+# Loading work.fulladder32
+# Loading work.fulladder
+# Loading work.imem
+# Loading work.dmem
+add wave -position end sim:/testbench/cpu/*
+run -all
+# Task 2 Passed
+# ** Note: $stop    : C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv(90)
+#    Time: 5200 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv line 90
+add wave -position end sim:/testbench/cpu/processor/u_reg_file/*
+restart -f
+run -all
+# Task 2 Passed
+# ** Note: $stop    : C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv(90)
+#    Time: 5200 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv line 90
+# End time: 22:32:09 on Apr 20,2023, Elapsed time: 2:30:30
+# Errors: 0, Warnings: 0
