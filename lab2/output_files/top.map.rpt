@@ -1,5 +1,5 @@
 Analysis & Synthesis report for top
-Thu Apr 20 20:00:53 2023
+Sat Apr 22 16:10:17 2023
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -44,7 +44,7 @@ agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Apr 20 20:00:53 2023       ;
+; Analysis & Synthesis Status     ; Successful - Sat Apr 22 16:10:17 2023       ;
 ; Quartus Prime Version           ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
 ; Revision Name                   ; top                                         ;
 ; Top-level Entity Name           ; top                                         ;
@@ -156,8 +156,8 @@ agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 12          ;
-; Maximum allowed            ; 12          ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -167,21 +167,21 @@ agreement for further details.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                            ; Library ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------+---------+
-; top.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv         ;         ;
-; reg_file.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/reg_file.sv    ;         ;
-; imem.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv        ;         ;
-; fulladder32.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder32.sv ;         ;
-; fulladder.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder.sv   ;         ;
-; dmem.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/dmem.sv        ;         ;
-; arm.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/arm.sv         ;         ;
-; alu.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/alu.sv         ;         ;
-; memfile2.dat                     ; yes             ; Auto-Found Unspecified File  ; C:/Users/Aaron Hong/Documents/ee469/lab2/memfile2.dat   ;         ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                            ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                        ; Library ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------+---------+
+; top.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/top.sv         ;         ;
+; reg_file.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/reg_file.sv    ;         ;
+; imem.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/imem.sv        ;         ;
+; fulladder32.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/fulladder32.sv ;         ;
+; fulladder.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/fulladder.sv   ;         ;
+; dmem.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/dmem.sv        ;         ;
+; arm.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/arm.sv         ;         ;
+; alu.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/honga/Documents/cse469/lab2/alu.sv         ;         ;
+; memfile2.dat                     ; yes             ; Auto-Found Unspecified File  ; C:/Users/honga/Documents/cse469/lab2/memfile2.dat   ;         ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -273,58 +273,58 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Thu Apr 20 20:00:46 2023
+    Info: Processing started: Sat Apr 22 16:10:06 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab2 -c top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 2 design units, including 2 entities, in source file top.sv
-    Info (12023): Found entity 1: top File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 9
-    Info (12023): Found entity 2: testbench File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 57
+    Info (12023): Found entity 1: top File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 9
+    Info (12023): Found entity 2: testbench File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 57
 Info (12021): Found 0 design units, including 0 entities, in source file testbench.sv
 Info (12021): Found 1 design units, including 1 entities, in source file reg_file_testbench.sv
-    Info (12023): Found entity 1: reg_file_testbench File: C:/Users/Aaron Hong/Documents/ee469/lab2/reg_file_testbench.sv Line: 8
+    Info (12023): Found entity 1: reg_file_testbench File: C:/Users/honga/Documents/cse469/lab2/reg_file_testbench.sv Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file reg_file.sv
-    Info (12023): Found entity 1: reg_file File: C:/Users/Aaron Hong/Documents/ee469/lab2/reg_file.sv Line: 11
+    Info (12023): Found entity 1: reg_file File: C:/Users/honga/Documents/cse469/lab2/reg_file.sv Line: 11
 Info (12021): Found 1 design units, including 1 entities, in source file imem.sv
-    Info (12023): Found entity 1: imem File: C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv Line: 15
+    Info (12023): Found entity 1: imem File: C:/Users/honga/Documents/cse469/lab2/imem.sv Line: 15
 Info (12021): Found 2 design units, including 2 entities, in source file fulladder32.sv
-    Info (12023): Found entity 1: fulladder32 File: C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder32.sv Line: 9
-    Info (12023): Found entity 2: fulladder32_testbench File: C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder32.sv Line: 57
+    Info (12023): Found entity 1: fulladder32 File: C:/Users/honga/Documents/cse469/lab2/fulladder32.sv Line: 9
+    Info (12023): Found entity 2: fulladder32_testbench File: C:/Users/honga/Documents/cse469/lab2/fulladder32.sv Line: 57
 Info (12021): Found 2 design units, including 2 entities, in source file fulladder.sv
-    Info (12023): Found entity 1: fulladder File: C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder.sv Line: 9
-    Info (12023): Found entity 2: fulladder_testbench File: C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder.sv Line: 20
+    Info (12023): Found entity 1: fulladder File: C:/Users/honga/Documents/cse469/lab2/fulladder.sv Line: 9
+    Info (12023): Found entity 2: fulladder_testbench File: C:/Users/honga/Documents/cse469/lab2/fulladder.sv Line: 20
 Info (12021): Found 1 design units, including 1 entities, in source file dmem.sv
-    Info (12023): Found entity 1: dmem File: C:/Users/Aaron Hong/Documents/ee469/lab2/dmem.sv Line: 13
+    Info (12023): Found entity 1: dmem File: C:/Users/honga/Documents/cse469/lab2/dmem.sv Line: 13
 Info (12021): Found 1 design units, including 1 entities, in source file arm.sv
-    Info (12023): Found entity 1: arm File: C:/Users/Aaron Hong/Documents/ee469/lab2/arm.sv Line: 13
+    Info (12023): Found entity 1: arm File: C:/Users/honga/Documents/cse469/lab2/arm.sv Line: 13
 Info (12021): Found 1 design units, including 1 entities, in source file alu_testbench.sv
-    Info (12023): Found entity 1: alu_testbench File: C:/Users/Aaron Hong/Documents/ee469/lab2/alu_testbench.sv Line: 8
+    Info (12023): Found entity 1: alu_testbench File: C:/Users/honga/Documents/cse469/lab2/alu_testbench.sv Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
-    Info (12023): Found entity 1: alu File: C:/Users/Aaron Hong/Documents/ee469/lab2/alu.sv Line: 11
+    Info (12023): Found entity 1: alu File: C:/Users/honga/Documents/cse469/lab2/alu.sv Line: 11
 Info (12127): Elaborating entity "top" for the top level hierarchy
-Info (12128): Elaborating entity "arm" for hierarchy "arm:processor" File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 30
-Info (12128): Elaborating entity "reg_file" for hierarchy "arm:processor|reg_file:u_reg_file" File: C:/Users/Aaron Hong/Documents/ee469/lab2/arm.sv Line: 72
-Info (12128): Elaborating entity "alu" for hierarchy "arm:processor|alu:u_alu" File: C:/Users/Aaron Hong/Documents/ee469/lab2/arm.sv Line: 96
-Info (12128): Elaborating entity "fulladder32" for hierarchy "arm:processor|alu:u_alu|fulladder32:FA" File: C:/Users/Aaron Hong/Documents/ee469/lab2/alu.sv Line: 24
-Info (12128): Elaborating entity "fulladder" for hierarchy "arm:processor|alu:u_alu|fulladder32:FA|fulladder:FA0" File: C:/Users/Aaron Hong/Documents/ee469/lab2/fulladder32.sv Line: 21
-Info (12128): Elaborating entity "imem" for hierarchy "imem:imemory" File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 38
-Warning (10850): Verilog HDL warning at imem.sv(22): number of words (30) in memory file does not match the number of elements in the address range [0:63] File: C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv Line: 22
-Warning (10030): Net "memory.data_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv Line: 19
-Warning (10030): Net "memory.waddr_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv Line: 19
-Warning (10030): Net "memory.we_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/Aaron Hong/Documents/ee469/lab2/imem.sv Line: 19
-Info (12128): Elaborating entity "dmem" for hierarchy "dmem:dmemory" File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 48
+Info (12128): Elaborating entity "arm" for hierarchy "arm:processor" File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 30
+Info (12128): Elaborating entity "reg_file" for hierarchy "arm:processor|reg_file:u_reg_file" File: C:/Users/honga/Documents/cse469/lab2/arm.sv Line: 71
+Info (12128): Elaborating entity "alu" for hierarchy "arm:processor|alu:u_alu" File: C:/Users/honga/Documents/cse469/lab2/arm.sv Line: 94
+Info (12128): Elaborating entity "fulladder32" for hierarchy "arm:processor|alu:u_alu|fulladder32:FA" File: C:/Users/honga/Documents/cse469/lab2/alu.sv Line: 24
+Info (12128): Elaborating entity "fulladder" for hierarchy "arm:processor|alu:u_alu|fulladder32:FA|fulladder:FA0" File: C:/Users/honga/Documents/cse469/lab2/fulladder32.sv Line: 21
+Info (12128): Elaborating entity "imem" for hierarchy "imem:imemory" File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 38
+Warning (10850): Verilog HDL warning at imem.sv(22): number of words (30) in memory file does not match the number of elements in the address range [0:63] File: C:/Users/honga/Documents/cse469/lab2/imem.sv Line: 22
+Warning (10030): Net "memory.data_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/honga/Documents/cse469/lab2/imem.sv Line: 19
+Warning (10030): Net "memory.waddr_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/honga/Documents/cse469/lab2/imem.sv Line: 19
+Warning (10030): Net "memory.we_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/honga/Documents/cse469/lab2/imem.sv Line: 19
+Info (12128): Elaborating entity "dmem" for hierarchy "dmem:dmemory" File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 48
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk" File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 10
-    Warning (15610): No output dependent on input pin "rst" File: C:/Users/Aaron Hong/Documents/ee469/lab2/top.sv Line: 11
+    Warning (15610): No output dependent on input pin "clk" File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 10
+    Warning (15610): No output dependent on input pin "rst" File: C:/Users/honga/Documents/cse469/lab2/top.sv Line: 11
 Info (21057): Implemented 2 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 0 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
     Info: Peak virtual memory: 4803 megabytes
-    Info: Processing ended: Thu Apr 20 20:00:53 2023
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Processing ended: Sat Apr 22 16:10:17 2023
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:08
 
 

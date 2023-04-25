@@ -58,8 +58,7 @@ module arm (
     assign RA1 = RegSrc[0] ? 4'd15        : Instr[19:16];
     assign RA2 = RegSrc[1] ? Instr[15:12] : Instr[ 3: 0];
 
-    // TODO: insert your reg file here
-    // TODO: instantiation comment
+    // Instantiates a register file to hold values.
     reg_file u_reg_file (
         .clk       (clk), 
         .wr_en     (RegWrite),
@@ -85,8 +84,7 @@ module arm (
     assign SrcB      = ALUSrc        ? ExtImm  : WriteData;     // determine alu operand to be either from reg file or from immediate
 
 
-    // TODO: insert your alu here
-    // TODO: instantiation comment
+    // Instantiates an alu module to do arithmetic operations.
     alu u_alu (
         .a          (SrcA), 
         .b          (SrcB),
@@ -197,10 +195,10 @@ module arm (
 					if((cond == 1110) ||
 						(cond == 0000 && FlagsReg[2]) ||
 						(cond == 0001 && !FlagsReg[2]) ||
-						(cond == 1010 && !FlagsReg[3]) ||
-						(cond == 1100 && !FlagsReg[3] && !FlagsReg[2]) ||
-						(cond == 1101 && (FlagsReg[3] || FlagsReg[2])) ||
-						(cond == 1011 && FlagsReg[3])
+						(cond == 1010 && (FlagsReg[3] == FlagsReg[0])) ||
+						(cond == 1100 && !FlagsReg[3] && (FlagsReg[2] == FlagsReg[0])) ||
+						(cond == 1101 && (FlagsReg[2] || (!FlagsReg[3] == FlagsReg[0]))) ||
+						(cond == 1011 && (!FlagsReg[3] == FlagsReg[0]))
 						) begin
 						 PCSrc    = 1; 
 						 MemtoReg = 0;
