@@ -1,5 +1,5 @@
 Analysis & Synthesis report for top
-Thu May 04 23:00:40 2023
+Sun May 07 17:33:34 2023
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -15,11 +15,9 @@ Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
   9. Port Connectivity Checks: "arm:processor|cond_unit:u_cond_unit"
- 10. Port Connectivity Checks: "arm:processor|alu:u_alu"
- 11. Port Connectivity Checks: "arm:processor|reg_file:u_reg_file"
- 12. Post-Synthesis Netlist Statistics for Top Partition
- 13. Elapsed Time Per Partition
- 14. Analysis & Synthesis Messages
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -46,7 +44,7 @@ agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu May 04 23:00:40 2023       ;
+; Analysis & Synthesis Status     ; Successful - Sun May 07 17:33:34 2023       ;
 ; Quartus Prime Version           ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
 ; Revision Name                   ; top                                         ;
 ; Top-level Entity Name           ; top                                         ;
@@ -183,7 +181,8 @@ agreement for further details.
 ; arm.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv         ;         ;
 ; alu.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv         ;         ;
 ; cond_unit.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv   ;         ;
-; memfile2.dat                     ; yes             ; Auto-Found Unspecified File  ; C:/Users/Aaron Hong/Documents/cse469/lab3/memfile2.dat   ;         ;
+; hazard_unit.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv ;         ;
+; memfile.dat                      ; yes             ; Auto-Found Unspecified File  ; C:/Users/Aaron Hong/Documents/cse469/lab3/memfile.dat    ;         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------+---------+
 
 
@@ -248,24 +247,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "arm:processor|alu:u_alu"                                                                                                                                ;
-+------------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port       ; Type  ; Severity ; Details                                                                                                                                            ;
-+------------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; ALUControl ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (2 bits) it drives.  Extra input bit(s) "ALUControl[1..1]" will be connected to GND. ;
-+------------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "arm:processor|reg_file:u_reg_file"                                                                                                                      ;
-+------------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port       ; Type  ; Severity ; Details                                                                                                                                            ;
-+------------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; write_addr ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (4 bits) it drives.  Extra input bit(s) "write_addr[3..1]" will be connected to GND. ;
-+------------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-------------------+---------------------------------+
@@ -293,7 +274,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Thu May 04 23:00:34 2023
+    Info: Processing started: Sun May 07 17:33:28 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab3 -c top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
@@ -323,31 +304,36 @@ Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: alu File: C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv Line: 11
 Info (12021): Found 1 design units, including 1 entities, in source file cond_unit.sv
     Info (12023): Found entity 1: cond_unit File: C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv Line: 11
-Warning (10236): Verilog HDL Implicit Net warning at arm.sv(75): created implicit net for "WA3W" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 75
-Warning (10236): Verilog HDL Implicit Net warning at arm.sv(117): created implicit net for "BranchTakenE" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 117
-Warning (10236): Verilog HDL Implicit Net warning at arm.sv(162): created implicit net for "CondExE" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 162
+Info (12021): Found 1 design units, including 1 entities, in source file hazard_unit.sv
+    Info (12023): Found entity 1: hazard_unit File: C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv Line: 11
+Warning (10236): Verilog HDL Implicit Net warning at arm.sv(138): created implicit net for "PCWrPendingF" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 138
+Warning (10236): Verilog HDL Implicit Net warning at arm.sv(140): created implicit net for "FlushD" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 140
+Warning (10236): Verilog HDL Implicit Net warning at arm.sv(141): created implicit net for "FlushE" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 141
+Warning (10236): Verilog HDL Implicit Net warning at arm.sv(142): created implicit net for "StallD" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 142
+Warning (10236): Verilog HDL Implicit Net warning at hazard_unit.sv(22): created implicit net for "ldrstallD" File: C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv Line: 22
 Info (12127): Elaborating entity "top" for the top level hierarchy
 Info (12128): Elaborating entity "arm" for hierarchy "arm:processor" File: C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv Line: 30
 Warning (10036): Verilog HDL or VHDL warning at arm.sv(26): object "FlagsE" assigned a value but never read File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 26
 Warning (10036): Verilog HDL or VHDL warning at arm.sv(33): object "MemtoRegW" assigned a value but never read File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 33
 Warning (10036): Verilog HDL or VHDL warning at arm.sv(37): object "ALUSrcE" assigned a value but never read File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 37
-Warning (10036): Verilog HDL or VHDL warning at arm.sv(40): object "CondE" assigned a value but never read File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 40
-Warning (10230): Verilog HDL assignment warning at arm.sv(151): truncated value with size 4 to match size of target (1) File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 151
-Warning (10230): Verilog HDL assignment warning at arm.sv(205): truncated value with size 32 to match size of target (1) File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 205
-Warning (10230): Verilog HDL assignment warning at arm.sv(220): truncated value with size 32 to match size of target (1) File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 220
-Warning (10230): Verilog HDL assignment warning at arm.sv(262): truncated value with size 32 to match size of target (1) File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 262
-Info (12128): Elaborating entity "reg_file" for hierarchy "arm:processor|reg_file:u_reg_file" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 80
-Info (12128): Elaborating entity "alu" for hierarchy "arm:processor|alu:u_alu" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 103
+Warning (10036): Verilog HDL or VHDL warning at arm.sv(45): object "CondE" assigned a value but never read File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 45
+Warning (10230): Verilog HDL assignment warning at arm.sv(334): truncated value with size 32 to match size of target (1) File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 334
+Info (12128): Elaborating entity "reg_file" for hierarchy "arm:processor|reg_file:u_reg_file" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 90
+Info (12128): Elaborating entity "alu" for hierarchy "arm:processor|alu:u_alu" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 126
 Info (12128): Elaborating entity "fulladder32" for hierarchy "arm:processor|alu:u_alu|fulladder32:FA" File: C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv Line: 24
 Info (12128): Elaborating entity "fulladder" for hierarchy "arm:processor|alu:u_alu|fulladder32:FA|fulladder:FA0" File: C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder32.sv Line: 21
-Info (12128): Elaborating entity "cond_unit" for hierarchy "arm:processor|cond_unit:u_cond_unit" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 163
+Info (12128): Elaborating entity "cond_unit" for hierarchy "arm:processor|cond_unit:u_cond_unit" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 151
+Info (12128): Elaborating entity "hazard_unit" for hierarchy "arm:processor|hazard_unit:u_hazard_unit" File: C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv Line: 165
+Warning (10036): Verilog HDL or VHDL warning at hazard_unit.sv(22): object "ldrstallD" assigned a value but never read File: C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv Line: 22
+Warning (10230): Verilog HDL assignment warning at hazard_unit.sv(26): truncated value with size 32 to match size of target (2) File: C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv Line: 26
+Warning (10230): Verilog HDL assignment warning at hazard_unit.sv(30): truncated value with size 32 to match size of target (2) File: C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv Line: 30
+Warning (10034): Output port "ldrStallD" at hazard_unit.sv(18) has no driver File: C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv Line: 18
 Info (12128): Elaborating entity "imem" for hierarchy "imem:imemory" File: C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv Line: 38
-Warning (10850): Verilog HDL warning at imem.sv(22): number of words (30) in memory file does not match the number of elements in the address range [0:63] File: C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv Line: 22
+Warning (10850): Verilog HDL warning at imem.sv(22): number of words (14) in memory file does not match the number of elements in the address range [0:63] File: C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv Line: 22
 Warning (10030): Net "memory.data_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv Line: 19
 Warning (10030): Net "memory.waddr_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv Line: 19
 Warning (10030): Net "memory.we_a" at imem.sv(19) has no driver or initial value, using a default initial value '0' File: C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv Line: 19
 Info (12128): Elaborating entity "dmem" for hierarchy "dmem:dmemory" File: C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv Line: 48
-Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
@@ -356,9 +342,9 @@ Warning (21074): Design contains 2 input pin(s) that do not drive logic
 Info (21057): Implemented 2 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
-    Info: Peak virtual memory: 4802 megabytes
-    Info: Processing ended: Thu May 04 23:00:40 2023
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 22 warnings
+    Info: Peak virtual memory: 4804 megabytes
+    Info: Processing ended: Sun May 07 17:33:34 2023
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:05
 

@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/Aaron Hong/Documents/cse469/lab3/simulation/modelsim
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1683189901
+Z2 !s110 1683509509
 !i10b 1
 !s100 =8XKo7:h@hDA;@Q;Joz>X3
 INmO<7nQ`RT56;a4KoWlE>0
@@ -26,7 +26,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1683189901.000000
+Z6 !s108 1683509509.000000
 !s107 C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv|
 !i113 1
@@ -37,13 +37,13 @@ varm
 R1
 R2
 !i10b 1
-!s100 gb<_:WDU@=c8M1=?XKI_f2
-I43E:186i2cZ2h4W6=E8XJ2
+!s100 ZjeFN1RD@=JQKXF50D0GF2
+I=[fk;fQ2?<C@fE==a]BlQ3
 R3
 !s105 arm_sv_unit
 S1
 R0
-w1683187466
+w1683506008
 8C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv
 FC:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv
 Z10 L0 13
@@ -62,13 +62,13 @@ vcond_unit
 R1
 R2
 !i10b 1
-!s100 S^JaXNfC5Q4Y;IZMeAZAT3
-IU36LjW[iW>eNg8V3L9E081
+!s100 ]1b?J;G<kR6FfFIUeDFd50
+IPY06l?>ClSBeA5j:H:f^<2
 R3
 !s105 cond_unit_sv_unit
 S1
 R0
-w1683189838
+w1683263782
 8C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv
 FC:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv
 R4
@@ -208,17 +208,42 @@ R16
 R7
 R8
 R9
+vhazard_unit
+R1
+R2
+!i10b 1
+!s100 N9FjTZZkMJ37XnX7D]7X<1
+Igh:0B9ASU6jFI1_?3n=^D1
+R3
+!s105 hazard_unit_sv_unit
+S1
+R0
+w1683360359
+8C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv|
+!i113 1
+R7
+R8
+R9
 vimem
 R1
 R2
 !i10b 1
-!s100 hkh`;_P=2lWgN[EXcG^fV0
-IoEe3chXOX758g]jPU^VER3
+!s100 [28JEdGYc^2]KnWmGd?l13
+IcI<UI=fQjc?Q]4PW4`djK3
 R3
 !s105 imem_sv_unit
 S1
 R0
-Z24 w1683183359
+w1683503041
 8C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv
 FC:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv
 L0 15
@@ -262,13 +287,13 @@ vtestbench
 R1
 R2
 !i10b 1
-!s100 261jXBT?OALjn;Co0DR`22
-Ic_ozciANEJO4]<QBdCDk:0
+!s100 3;<g];^MagbNXdPU[2nz<0
+I<e2i95QFFXd>1J?FNNzRZ1
 R3
-Z25 !s105 top_sv_unit
+Z24 !s105 top_sv_unit
 S1
 R0
-R24
+Z25 w1683497227
 Z26 8C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv
 Z27 FC:/Users/Aaron Hong/Documents/cse469/lab3/top.sv
 R23
@@ -290,10 +315,10 @@ R2
 !s100 6X6T21d]QNM;H;KA;UXh62
 IY692]7MHDz`el;W>f9LJz1
 R3
-R25
+R24
 S1
 R0
-R24
+R25
 R26
 R27
 L0 9

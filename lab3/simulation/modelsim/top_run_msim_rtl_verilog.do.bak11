@@ -13,5 +13,6 @@ vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/cse469/lab3 {C:/Users
 vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/cse469/lab3 {C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv}
 vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/cse469/lab3 {C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv}
 vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/cse469/lab3 {C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv}
+vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/cse469/lab3 {C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv}
 vlog -sv -work work +incdir+C:/Users/Aaron\ Hong/Documents/cse469/lab3 {C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv}
 

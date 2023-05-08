@@ -12,15 +12,15 @@
 
 module arm (
     input  logic        clk, rst,
-    input  logic [31:0] InstrF,
-    input  logic [31:0] ReadDataM,
-    output logic [31:0] WriteDataM, 
-    output logic [31:0] PCF, ALUOutM,
-    output logic        MemWriteM
+    input  logic [31:0] Instr,
+    input  logic [31:0] ReadData,
+    output logic [31:0] WriteData, 
+    output logic [31:0] PC, ALUResult,
+    output logic        MemWrite
 );
 
     // datapath buses and signals
-    logic [31:0] PCPrime, PCPlus4F, PCPlus8D; // pc signals
+    logic [31:0] PCF, PCPrime, PCPlus4F, PCPlus8D; // pc signals
     logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
     logic [31:0] RD1D, RD2D, RD1E, RD2E;                  // raw regfile outputs
     logic [ 3:0] ALUFlags, FlagsD, FlagsE;                  // alu combinational flag outputs
@@ -31,17 +31,26 @@ module arm (
     logic PCSrcD, PCSrcE, PCSrcM, PCSrcW;
 	 logic RegWriteD, RegWriteE, RegWriteM, RegWriteW;
 	 logic MemtoRegD, MemtoRegE, MemtoRegM, MemtoRegW;
-	 logic MemWriteD, MemWriteE;
-	 logic ALUControlD, ALUControlE;
+	 logic MemWriteD, MemWriteE, MemWriteM;
+	 logic [1:0] ALUControlD, ALUControlE;
 	 logic BranchD, BranchE;
 	 logic ALUSrcD, ALUSrcE;
 	 logic ImmSrcD;
+	 logic Match_1E_M, Match_2E_M;
+	 logic Match_1E_W, Match_2E_W;
+	 logic Match_12D_E;
+	 logic BranchTakenE, StallF, ldrStallD, CondExE;
 	 logic [1:0] FlagWriteD, FlagWriteE, RegSrcD; 
-	 logic [3:0] CondE, WA3E, WA3M;
+	 logic [1:0] ForwardAE, ForwardBE;
+	 logic [3:0] CondE, WA3E, WA3M, WA3W;
+	 logic [31:0] ALUOutW, ALUOutM;
+	 logic [31:0] InstrF, InstrD;
+	 logic [31:0] ReadDataM, ReadDataW;
+	 logic [31:0] WriteDataE, WriteDataM;
 	 
-	 logic [31:0] InstrD, ALUResultE, WriteDataE, ReadDataW, ALUOutW;
+	 logic [31:0] ALUResultE;
 
-
+	 
     /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words to pass forward and operate on. It is 
     ** noticeably missing the register file and alu, which you will fill in using the modules made in lab 1. To correctly match up signals to the 
     ** ports of the register file and alu take some time to study and understand the logic and flow of the datapath.
@@ -57,8 +66,9 @@ module arm (
 
     // update the PC, at rst initialize to 0
     always_ff @(posedge clk) begin
-        if (rst) PCF <= '0;
-        else     PCF <= PCPrime;
+        if (rst)          PCF <= '0; 
+        else if (StallF)  PCF <= PCF;
+		  else              PCF <= PCPrime;
     end
 
     // determine the register addresses based on control signals
@@ -69,7 +79,7 @@ module arm (
 
     // Instantiates a register file to hold values.
     reg_file u_reg_file (
-        .clk       (clk), 
+        .clk       (!clk), 
         .wr_en     (RegWriteW),
         .write_data(ResultW),
         .write_addr(WA3W),
@@ -87,11 +97,24 @@ module arm (
         else                      ExtImmD = {{6{InstrD[23]}}, InstrD[23:0], 2'b00}; // 24 bit immediate - branch operation
     end
 
-    // WriteData and SrcA are direct outputs of the register file, wheras SrcB is chosen between reg file output and the immediate
-    assign WriteDataE = (RA2D == 'd15) ? PCPlus8D : RD2E;           // substitute the 15th regfile register for PC 
-    assign SrcAE      = (RA1D == 'd15) ? PCPlus8D : RD1E;           // substitute the 15th regfile register for PC 
-    assign SrcBE      = ALUSrcD        ? ExtImmE  : WriteDataE;     // determine alu operand to be either from reg file or from immediate
-
+    // WriteData and SrcA are direct outputs of the register file, wheras SrcB is chosen between reg file output and the immediate            
+    assign SrcBE = ALUSrcD ? ExtImmE : WriteDataE;     // determine alu operand to be either from reg file or from immediate
+	 always_comb begin
+		case (ForwardAE)
+			2'b00: SrcAE = (RA1D == 'd15) ? PCPlus8D : RD1E; // substitute the 15th regfile register for PC
+			2'b01: SrcAE = ResultW;
+			2'b10: SrcAE = ALUOutM;
+			default: SrcAE = 0;
+		endcase
+		
+		case (ForwardBE)
+			2'b00: WriteDataE = (RA2D == 'd15) ? PCPlus8D : RD2E; // substitute the 15th regfile register for PC
+			2'b01: WriteDataE = ResultW;
+			2'b10: WriteDataE = ALUOutM;
+			default: WriteDataE = 0;
+		endcase
+	 end
+			
 
     // Instantiates an alu module to do arithmetic operations.
     alu u_alu (
@@ -105,54 +128,19 @@ module arm (
     // determine the result to run back to PC or the register file based on whether we used a memory instruction
     assign ResultW = MemtoRegD ? ReadDataW : ALUOutW;    // determine whether final writeback result is from dmemory or alu
 
+	 assign InstrF = Instr;
+	 assign ReadDataM = ReadData;
+	 assign WriteData = WriteDataM;
+	 assign MemWrite = MemWriteM;
+	 assign PC = PCF;
+	 assign ALUResult = ALUOutM;
 	 
-    /* The control conists of a large decoder, which evaluates the top bits of the instruction and produces the control bits 
-    ** which become the select bits and write enables of the system. The write enables (RegW, MemW and PCS) are 
-    ** especially important because they are representative of your processors current state. 
-    */
-    //-------------------------------------------------------------------------------
-    //                                      CONTROL
-    //-------------------------------------------------------------------------------
-    
+	 assign PCWrPendingF = PCSrcD + PCSrcE + PCSrcM;
+	 assign StallF = ldrStallD + PCWrPendingF;
+	 assign FlushD = PCWrPendingF + PCSrcW + BranchTakenE;
+	 assign FlushE = ldrStallD + BranchTakenE;
+	 assign StallD = ldrStallD;
 	 assign BranchTakenE = BranchE & CondExE;
-	 
-	 always_ff @(posedge clk) begin
-			//Fetch to Decode
-			InstrD = InstrF;
-			
-			//Decode to Execute
-			PCSrcE = PCSrcD;
-			RegWriteE = RegWriteD;
-			MemtoRegE = MemtoRegD;
-			MemWriteE = MemWriteD;
-			ALUControlE = ALUControlD;
-			BranchE = BranchD;
-			ALUSrcE = ALUSrcD;
-			FlagWriteE = FlagWriteD;
-			CondE = InstrD[31:28];
-			FlagsE = FlagsD;
-			RD1E = RD1D;
-			RD2E = RD2D;
-			WA3E = InstrD[15:12];
-			ExtImmE = ExtImmD;
-			
-			//Execute to Memory
-			PCSrcM = (PCSrcE | BranchE) & CondExE;
-			RegWriteM = RegWriteE & CondExE;
-			MemtoRegM = MemtoRegE;
-			MemWriteM = MemWriteE & CondExE;
-			WriteDataM = WriteDataE;
-			ALUOutM = ALUResultE;
-			WA3M = WA3E;
-			
-			//Memory to Writeback
-			ReadDataW = ReadDataM;
-			ALUOutW = ALUOutM;
-			WA3W = WA3M;
-			PCSrcW = PCSrcM;
-			RegWriteW = RegWriteM;
-			MemtoRegW = MemtoRegM;	
-	 end
 	 
 	 cond_unit u_cond_unit (
 			.cond			(InstrD[31:28]),
@@ -162,6 +150,90 @@ module arm (
 			.cond_ex		(CondExE)
 	 );
 	 
+	 hazard_unit u_hazard_unit (
+			.Match_1E_M	(RD1E == WA3M),
+			.Match_2E_M (RD2E == WA3M),
+			.Match_1E_W (RD1E == WA3W),
+			.Match_2E_W (RD2E == WA3W),
+			.Match_12D_E((RA1D == WA3E) + (RA2D == WA3E)),
+			.RegWriteM  (RegWriteM),
+			.RegWriteW  (RegWriteW),
+			.MemtoRegE  (MemtoRegE),
+			.ForwardAE	(ForwardAE),
+			.ForwardBE	(ForwardBE),
+			.ldrStallD	(ldrStallD)
+	 );
+	 
+
+	 always_ff @(posedge clk) begin
+			//Fetch to Decode
+			if (FlushD) InstrD <= 32'b0;
+			else if (StallD) InstrD <= InstrD;
+			else InstrD <= InstrF;
+			
+			//Decode to Execute
+			if (FlushE) begin
+				PCSrcE <= 0;
+				RegWriteE <= 0;
+				MemtoRegE <= 0;
+				MemWriteE <= 0;
+				ALUControlE <= 0;
+				BranchE <= 0;
+				ALUSrcE <= 0;
+				FlagWriteE <= 0;
+				CondE <= 0;
+				FlagsE <= 0;
+				RD1E <= 0;
+				RD2E <= 0;
+				WA3E <= 0;
+				ExtImmE <= 0;
+			end
+			else begin
+				PCSrcE <= PCSrcD;
+				RegWriteE <= RegWriteD;
+				MemtoRegE <= MemtoRegD;
+				MemWriteE <= MemWriteD;
+				ALUControlE <= ALUControlD;
+				BranchE <= BranchD;
+				ALUSrcE <= ALUSrcD;
+				FlagWriteE <= FlagWriteD;
+				CondE <= InstrD[31:28];
+				FlagsE <= FlagsD;
+				RD1E <= RD1D;
+				RD2E <= RD2D;
+				WA3E <= InstrD[15:12];
+				ExtImmE <= ExtImmD;
+			end
+			
+			//Execute to Memory
+			PCSrcM <= (PCSrcE | BranchE) & CondExE;
+			RegWriteM <= RegWriteE & CondExE;
+			MemtoRegM <= MemtoRegE;
+			MemWriteM <= MemWriteE & CondExE;
+			WriteDataM <= WriteDataE;
+			ALUOutM <= ALUResultE;
+			WA3M <= WA3E;
+			
+			//Memory to Writeback
+			ReadDataW <= ReadDataM;
+			ALUOutW <= ALUOutM;
+			WA3W <= WA3M;
+			PCSrcW <= PCSrcM;
+			RegWriteW <= RegWriteM;
+			MemtoRegW <= MemtoRegM;	
+	 end
+	 
+	
+    /* The control conists of a large decoder, which evaluates the top bits of the instruction and produces the control bits 
+    ** which become the select bits and write enables of the system. The write enables (RegW, MemW and PCS) are 
+    ** especially important because they are representative of your processors current state. 
+    */
+    //-------------------------------------------------------------------------------
+    //                                      CONTROL
+    //-------------------------------------------------------------------------------
+    
+
+
     always_comb begin
         casez (InstrD[27:20])
 

@@ -21,12 +21,12 @@ module top(
     arm processor (
         .clk        (clk        ), 
         .rst        (rst        ),
-        .InstrF      (Instr      ),
-        .ReadDataM   (ReadData   ),
-        .WriteDataM  (WriteData  ), 
-        .PCF         (PC         ), 
-        .ALUOutM  (ALUResult  ),
-        .MemWriteM   (MemWrite   )
+        .Instr      (Instr      ),
+        .ReadData   (ReadData   ),
+        .WriteData  (WriteData  ), 
+        .PC         (PC         ), 
+        .ALUResult  (ALUResult  ),
+        .MemWrite   (MemWrite   )
     );
 
     // instruction memory
@@ -84,8 +84,8 @@ module testbench();
 //        else                                                 $display("Task 1 Failed");
 
         // task 2:
-        assert(cpu.processor.u_reg_file.memory[8] == 32'd1)  $display("Task 2 Passed");
-        else                                                 $display("Task 2 Failed");
+//        assert(cpu.processor.u_reg_file.memory[8] == 32'd1)  $display("Task 2 Passed");
+//        else                                                 $display("Task 2 Failed");
 
         $stop;
     end
