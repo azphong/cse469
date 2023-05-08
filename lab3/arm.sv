@@ -60,7 +60,7 @@ module arm (
     //-------------------------------------------------------------------------------
 
 
-    assign PCPrime = BranchTakenE ? (PCSrcW ? ResultW : PCPlus4F) : ALUResultE;  // mux, use either default or newly computed value
+    assign PCPrime = BranchTakenE ? ALUResultE : (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
 	 assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
     assign PCPlus8D = PCPlus4F;             // value read when reading from reg[15]
 
