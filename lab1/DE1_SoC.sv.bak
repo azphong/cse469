@@ -1,0 +1,93 @@
+//Aaron Hong (ahong02)
+//Stephen Macris (smacris)
+//11/2/22
+//EE271 Lab3
+
+//Instantiates windicator and clock_divider modules and maps them to an FPGA board. For clock_divider,
+//the clock input is CLOCK_50 and the output divided_clock is clk. clk is then assigned to LEDR[5]
+//and used as the clk input for fsm. For the rest of fsm, input reset is mapped to KEY[0], input
+//w is mapped to SW[0], and output out is mapped to LEDR[0]. For testing purposes, CLOCK_50 can be 
+//passed directly into the clk input for windicator.
+
+//Determines wind direction from switches and depending on the direction, cycles between different LED patterns
+//Inputs: One 10-bit input SW, one 4-bit input KEY, one 1-bit input (clock signal) CLOCK-50
+//Outputs: One 10-bit output LEDR, six 7-bit outputs HEX0, HEX1, HEX2, HEX3, HEX4, HEX5
+module DE1_SoC (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
+	
+	input logic CLOCK_50; // 50MHz clock
+	output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
+	output logic [9:0] LEDR;
+	input logic [3:0] KEY; // Active low property
+	input logic [9:0] SW;
+
+	// Generate clk off of CLOCK_50, whichClock picks rate.
+
+	logic [31:0] clk;
+
+	parameter whichClock = 25;
+
+    //Instantiates clock_divider using CLOCK_50 as input and clk as output
+	clock_divider cdiv (CLOCK_50, clk);
+
+	logic reset;  // configure reset
+
+	assign reset = ~KEY[0]; // Reset when KEY[0] is pressed
+	
+	assign LEDR[5] = clk[whichClock];
+//	assign LEDR[5] = CLOCK_50;
+	
+	//Instantiates windicator using SW[1:0] for input w, clk (output from clock_divider cdiv)
+	//for input clk, KEY[0] for input reset, and LEDR[2:0] for output out.
+	windicator w (.clk(clk[whichClock]), .reset(reset), .w(SW[1:0]), .out(LEDR[2:0]));
+
+endmodule
+
+//Tests DE1_SoC by creating a clock signal and using it to simulate relevant switch input strings.
+module DE1_SoC_testbench ();
+
+	logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
+	logic [9:0] LEDR;
+	logic [3:0] KEY;
+	logic [9:0] SW;
+	logic CLOCK_50;
+	
+	
+	DE1_SoC dut (.CLOCK_50, .HEX0, .HEX1, .HEX2, .HEX3, .HEX4, .HEX5, .KEY, .LEDR, .SW);
+	
+	parameter clock_period = 100;
+	
+	initial begin
+		CLOCK_50 <= 0;
+		forever #(clock_period /2) CLOCK_50 <= ~CLOCK_50;
+				
+	end //initial
+	
+
+	
+	initial begin
+	
+			KEY[0] <= 1;         @(posedge CLOCK_50);
+			KEY[0] <= 0; SW[1:0]<=00;   @(posedge CLOCK_50);
+									  @(posedge CLOCK_50);
+			                    @(posedge CLOCK_50);	
+			                    @(posedge CLOCK_50);	
+										@(posedge CLOCK_50);	
+							SW[1:0]<=10;   @(posedge CLOCK_50);	
+										@(posedge CLOCK_50);	
+									  @(posedge CLOCK_50);	
+			                    @(posedge CLOCK_50);	
+			                    @(posedge CLOCK_50);	
+							SW[1:0]<=01;   @(posedge CLOCK_50);	
+									  @(posedge CLOCK_50);	
+									  @(posedge CLOCK_50);	
+										@(posedge CLOCK_50);
+										@(posedge CLOCK_50);	
+							SW[1:0]<=11;	@(posedge CLOCK_50);	
+										@(posedge CLOCK_50);	
+									  @(posedge CLOCK_50);
+									  @(posedge CLOCK_50);
+		$stop; //end simulation							
+						
+	end //initial
+
+endmodule

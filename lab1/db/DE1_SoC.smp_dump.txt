@@ -1,0 +1,6 @@
+
+State Machine - |DE1_SoC|victory:v|ps
+Name ps~22 ps~19 ps~5 
+ps.S0 0 0 0 
+ps.S1 0 1 1 
+ps.S2 1 1 0 
