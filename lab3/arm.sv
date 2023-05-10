@@ -21,25 +21,25 @@ module arm (
 
     // datapath buses and signals
     logic [31:0] PCF, PCPrime, PCPlus4F, PCPlus8D; // pc signals
-    logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
+    logic [ 3:0] RA1D, RA2D, RA1E, RA2E;                  // regfile input addresses
     logic [31:0] RD1D, RD2D, RD1E, RD2E;                  // raw regfile outputs
-    logic [ 3:0] ALUFlags, FlagsD, FlagsE;                  // alu combinational flag outputs
+    logic [ 3:0] ALUFlags, FlagsD, FlagsE;                // alu combinational flag outputs
     logic [31:0] ExtImmD, ExtImmE, SrcAE, SrcBE;        // immediate and alu inputs 
     logic [31:0] ResultW;                    // computed or fetched value to be written into regfile or pc
 
     // control signals
-    logic PCSrcD, PCSrcE, PCSrcM, PCSrcW;
+    logic PCSrcD, PCSrcE, PCSrcM, PCSrcW, PCWrPendingF;
 	 logic RegWriteD, RegWriteE, RegWriteM, RegWriteW;
 	 logic MemtoRegD, MemtoRegE, MemtoRegM, MemtoRegW;
 	 logic MemWriteD, MemWriteE, MemWriteM;
 	 logic [1:0] ALUControlD, ALUControlE;
 	 logic BranchD, BranchE;
 	 logic ALUSrcD, ALUSrcE;
-	 logic ImmSrcD;
+	 logic [1:0] ImmSrcD;
 	 logic Match_1E_M, Match_2E_M;
 	 logic Match_1E_W, Match_2E_W;
 	 logic Match_12D_E;
-	 logic BranchTakenE, StallF, ldrStallD, CondExE;
+	 logic BranchTakenE, StallF, StallD, FlushD, FlushE, ldrStallD, CondEx, CondExE;
 	 logic [1:0] FlagWriteD, FlagWriteE, RegSrcD; 
 	 logic [1:0] ForwardAE, ForwardBE;
 	 logic [3:0] CondE, WA3E, WA3M, WA3W;
@@ -47,7 +47,6 @@ module arm (
 	 logic [31:0] InstrF, InstrD;
 	 logic [31:0] ReadDataM, ReadDataW;
 	 logic [31:0] WriteDataE, WriteDataM;
-	 
 	 logic [31:0] ALUResultE;
 
 	 
@@ -59,7 +58,14 @@ module arm (
     //                                      DATAPATH
     //-------------------------------------------------------------------------------
 
-
+	 // connect module inputs and outputs to datapath
+	 assign InstrF = Instr;
+	 assign ReadDataM = ReadData;
+	 assign WriteData = WriteDataM;
+	 assign MemWrite = MemWriteM;
+	 assign PC = PCF;
+	 assign ALUResult = ALUOutM;
+	 
     assign PCPrime = BranchTakenE ? ALUResultE : (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
 	 assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
     assign PCPlus8D = PCPlus4F;             // value read when reading from reg[15]
@@ -67,8 +73,8 @@ module arm (
     // update the PC, at rst initialize to 0
     always_ff @(posedge clk) begin
         if (rst)          PCF <= '0; 
-        else if (StallF)  PCF <= PCF;
-		  else              PCF <= PCPrime;
+        else if (!StallF) PCF <= PCPrime;
+		  else              PCF <= PCF;
     end
 
     // determine the register addresses based on control signals
@@ -98,20 +104,21 @@ module arm (
     end
 
     // WriteData and SrcA are direct outputs of the register file, wheras SrcB is chosen between reg file output and the immediate            
-    assign SrcBE = ALUSrcD ? ExtImmE : WriteDataE;     // determine alu operand to be either from reg file or from immediate
+    assign SrcBE = ALUSrcE ? ExtImmE : WriteDataE;     // determine alu operand to be either from reg file or from immediate
+	 // Depending on forwarding control signal from hazard unit, choose appropriate ALU operand
 	 always_comb begin
 		case (ForwardAE)
-			2'b00: SrcAE = (RA1D == 'd15) ? PCPlus8D : RD1E; // substitute the 15th regfile register for PC
+			2'b00: SrcAE = (RA1E == 'd15) ? (BranchTakenE ? PCPlus8D : PCF) : RD1E; // substitute the 15th regfile register for PC
 			2'b01: SrcAE = ResultW;
 			2'b10: SrcAE = ALUOutM;
-			default: SrcAE = 0;
+			default: SrcAE = RD1E;
 		endcase
 		
 		case (ForwardBE)
-			2'b00: WriteDataE = (RA2D == 'd15) ? PCPlus8D : RD2E; // substitute the 15th regfile register for PC
+			2'b00: WriteDataE = (RA2E == 'd15) ? (BranchTakenE ? PCPlus8D : PCF) : RD2E; // substitute the 15th regfile register for PC
 			2'b01: WriteDataE = ResultW;
 			2'b10: WriteDataE = ALUOutM;
-			default: WriteDataE = 0;
+			default: WriteDataE = RD2E;
 		endcase
 	 end
 			
@@ -126,69 +133,56 @@ module arm (
     );
 
     // determine the result to run back to PC or the register file based on whether we used a memory instruction
-    assign ResultW = MemtoRegD ? ReadDataW : ALUOutW;    // determine whether final writeback result is from dmemory or alu
+    assign ResultW = MemtoRegW ? ReadDataW : ALUOutW;    // determine whether final writeback result is from dmemory or alu
 
-	 assign InstrF = Instr;
-	 assign ReadDataM = ReadData;
-	 assign WriteData = WriteDataM;
-	 assign MemWrite = MemWriteM;
-	 assign PC = PCF;
-	 assign ALUResult = ALUOutM;
-	 
-	 assign PCWrPendingF = PCSrcD + PCSrcE + PCSrcM;
-	 assign StallF = ldrStallD + PCWrPendingF;
-	 assign FlushD = PCWrPendingF + PCSrcW + BranchTakenE;
-	 assign FlushE = ldrStallD + BranchTakenE;
-	 assign StallD = ldrStallD;
+	 // input signals for the hazard unit
+	 assign Match_1E_M = (RA1E == WA3M);
+	 assign Match_2E_M = (RA2E == WA3M);
+	 assign Match_1E_W = (RA1E == WA3W);
+	 assign Match_2E_W = (RA2E == WA3W);
+	 assign Match_12D_E = ((RA1D == WA3E) + (RA2D == WA3E));
+	 assign PCWrPendingF = (PCSrcD + PCSrcE + PCSrcM) & !BranchTakenE;
 	 assign BranchTakenE = BranchE & CondExE;
 	 
+	 // Instantiate a conditional unit to manage flags register and determine instruction execution
 	 cond_unit u_cond_unit (
-			.cond			(InstrD[31:28]),
-			.flags		(ALUFlags),
+			.cond			(CondE),
+			.flags		(FlagsE),
+			.ALUFlags   (ALUFlags),
 			.flag_write (FlagWriteE),
 			.flags_out  (FlagsD),
 			.cond_ex		(CondExE)
 	 );
 	 
+	 // Instantiate a hazard unit to provide stalling, flushing, and forwarding control signals
 	 hazard_unit u_hazard_unit (
-			.Match_1E_M	(RD1E == WA3M),
-			.Match_2E_M (RD2E == WA3M),
-			.Match_1E_W (RD1E == WA3W),
-			.Match_2E_W (RD2E == WA3W),
-			.Match_12D_E((RA1D == WA3E) + (RA2D == WA3E)),
+			.Match_1E_M	(Match_1E_M),
+			.Match_2E_M (Match_2E_M),
+			.Match_1E_W (Match_1E_W),
+			.Match_2E_W (Match_2E_W),
+			.Match_12D_E(Match_12D_E),
 			.RegWriteM  (RegWriteM),
 			.RegWriteW  (RegWriteW),
 			.MemtoRegE  (MemtoRegE),
+			.BranchTakenE (BranchTakenE),
+			.PCWrPendingF (PCWrPendingF),
+			.PCSrcW (PCSrcW),
 			.ForwardAE	(ForwardAE),
 			.ForwardBE	(ForwardBE),
-			.ldrStallD	(ldrStallD)
+			.StallF (StallF),
+			.StallD (StallD),
+			.FlushD (FlushD),
+			.FlushE (FlushE)
 	 );
 	 
-
+	 // Synchronously move signals along the datapath
 	 always_ff @(posedge clk) begin
 			//Fetch to Decode
 			if (FlushD) InstrD <= 32'b0;
-			else if (StallD) InstrD <= InstrD;
-			else InstrD <= InstrF;
-			
+			else if (!rst && !StallD) InstrD <= InstrF;
+
 			//Decode to Execute
-			if (FlushE) begin
-				PCSrcE <= 0;
-				RegWriteE <= 0;
-				MemtoRegE <= 0;
-				MemWriteE <= 0;
-				ALUControlE <= 0;
-				BranchE <= 0;
-				ALUSrcE <= 0;
-				FlagWriteE <= 0;
-				CondE <= 0;
-				FlagsE <= 0;
-				RD1E <= 0;
-				RD2E <= 0;
-				WA3E <= 0;
-				ExtImmE <= 0;
-			end
-			else begin
+			if (!FlushE) begin
 				PCSrcE <= PCSrcD;
 				RegWriteE <= RegWriteD;
 				MemtoRegE <= MemtoRegD;
@@ -201,18 +195,37 @@ module arm (
 				FlagsE <= FlagsD;
 				RD1E <= RD1D;
 				RD2E <= RD2D;
+				RA1E <= RA1D;
+				RA2E <= RA2D;
 				WA3E <= InstrD[15:12];
 				ExtImmE <= ExtImmD;
+			end else begin
+				PCSrcE <= 0;
+				RegWriteE <= 0;
+				MemtoRegE <= 0;
+				MemWriteE <= 0;
+				ALUControlE <= 0;
+				BranchE <= 0;
+				ALUSrcE <= 0;
+				FlagWriteE <= 0;
+				CondE <= 4'b1111;
+				FlagsE <= 0;
+				RD1E <= 0;
+				RD2E <= 0;
+				WA3E <= 0;
+				ExtImmE <= 0;
 			end
 			
 			//Execute to Memory
-			PCSrcM <= (PCSrcE | BranchE) & CondExE;
-			RegWriteM <= RegWriteE & CondExE;
-			MemtoRegM <= MemtoRegE;
-			MemWriteM <= MemWriteE & CondExE;
-			WriteDataM <= WriteDataE;
-			ALUOutM <= ALUResultE;
-			WA3M <= WA3E;
+			if (!BranchTakenE) begin
+				PCSrcM <= PCSrcE & CondExE;
+				RegWriteM <= RegWriteE & CondExE;
+				MemtoRegM <= MemtoRegE;
+				MemWriteM <= MemWriteE & CondExE;
+				WriteDataM <= WriteDataE;
+				ALUOutM <= ALUResultE;
+				WA3M <= WA3E;
+			end
 			
 			//Memory to Writeback
 			ReadDataW <= ReadDataM;
@@ -231,9 +244,6 @@ module arm (
     //-------------------------------------------------------------------------------
     //                                      CONTROL
     //-------------------------------------------------------------------------------
-    
-
-
     always_comb begin
         casez (InstrD[27:20])
 

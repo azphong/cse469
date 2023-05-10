@@ -7,329 +7,329 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dC:/Users/honga/Documents/cse469/lab3/simulation/modelsim
+Z0 dC:/Users/Aaron Hong/Documents/cse469/lab3/simulation/modelsim
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1683517803
+Z2 !s110 1683677996
 !i10b 1
 !s100 =8XKo7:h@hDA;@Q;Joz>X3
-IM7NoKUUhNdzJ<[LOVgkD70
+INmO<7nQ`RT56;a4KoWlE>0
 Z3 VDg1SIo80bB@j0V0VzS_@n1
 !s105 alu_sv_unit
 S1
 R0
-Z4 w1683512433
-8C:/Users/honga/Documents/cse469/lab3/alu.sv
-FC:/Users/honga/Documents/cse469/lab3/alu.sv
-Z5 L0 11
-Z6 OV;L;10.5b;63
+w1681018303
+8C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv
+Z4 L0 11
+Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1683517803.000000
-!s107 C:/Users/honga/Documents/cse469/lab3/alu.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/alu.sv|
+Z6 !s108 1683677996.000000
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/alu.sv|
 !i113 1
-Z8 o-sv -work work
-Z9 !s92 -sv -work work +incdir+C:/Users/honga/Documents/cse469/lab3
-Z10 tCvgOpt 0
+Z7 o-sv -work work
+Z8 !s92 -sv -work work {+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3}
+Z9 tCvgOpt 0
 varm
 R1
 R2
 !i10b 1
-!s100 :V>=SO?:jlilfSL4DESCj1
-IlLcnbE[gAYDT2=m:?XD?`3
+!s100 7WGzo_na74T>K^1O@TC=02
+IO[Fk34?ODGT[4QQ8g7`k^2
 R3
 !s105 arm_sv_unit
 S1
 R0
-w1683517208
-8C:/Users/honga/Documents/cse469/lab3/arm.sv
-FC:/Users/honga/Documents/cse469/lab3/arm.sv
-Z11 L0 13
-R6
+w1683675978
+8C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv
+Z10 L0 13
+R5
 r1
 !s85 0
 31
-R7
-!s107 C:/Users/honga/Documents/cse469/lab3/arm.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/arm.sv|
+R6
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/arm.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vcond_unit
 R1
 R2
 !i10b 1
-!s100 ]1b?J;G<kR6FfFIUeDFd50
-IFNT<ojX0UFW6ecL4aL8f;0
+!s100 94SGP9EQ[7ngT=f9jHL7Q0
+I9:<kLZK02CgMnSfC;YTiz1
 R3
 !s105 cond_unit_sv_unit
 S1
 R0
+w1683593903
+8C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv
 R4
-8C:/Users/honga/Documents/cse469/lab3/cond_unit.sv
-FC:/Users/honga/Documents/cse469/lab3/cond_unit.sv
 R5
-R6
 r1
 !s85 0
 31
-R7
-!s107 C:/Users/honga/Documents/cse469/lab3/cond_unit.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/cond_unit.sv|
+R6
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/cond_unit.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vdmem
 R1
 R2
 !i10b 1
 !s100 Oh:]]J_E8maKR390g`9n92
-I5j`^5A1bX9nb<[O^HMoDz2
+I8j<:VgOR2XLRKlhNQ6mM<3
 R3
 !s105 dmem_sv_unit
 S1
 R0
-R4
-8C:/Users/honga/Documents/cse469/lab3/dmem.sv
-FC:/Users/honga/Documents/cse469/lab3/dmem.sv
-R11
-R6
+w1681965489
+8C:/Users/Aaron Hong/Documents/cse469/lab3/dmem.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/dmem.sv
+R10
+R5
 r1
 !s85 0
 31
-R7
-!s107 C:/Users/honga/Documents/cse469/lab3/dmem.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/dmem.sv|
+R6
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/dmem.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/dmem.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vfulladder
 R1
 R2
 !i10b 1
 !s100 6m4RJ[l8akAbT6V68;bQT3
-II?Ve3VRCHc7H^Sol]L?o62
+IoIUD6lhL02:hOmfnIoeKT3
 R3
-Z12 !s105 fulladder_sv_unit
+Z11 !s105 fulladder_sv_unit
 S1
 R0
-R4
-Z13 8C:/Users/honga/Documents/cse469/lab3/fulladder.sv
-Z14 FC:/Users/honga/Documents/cse469/lab3/fulladder.sv
+Z12 w1681018785
+Z13 8C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder.sv
+Z14 FC:/Users/Aaron Hong/Documents/cse469/lab3/fulladder.sv
 L0 9
-R6
+R5
 r1
 !s85 0
 31
-R7
-Z15 !s107 C:/Users/honga/Documents/cse469/lab3/fulladder.sv|
-Z16 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/fulladder.sv|
+R6
+Z15 !s107 C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder.sv|
+Z16 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vfulladder32
 R1
-Z17 !s110 1683517802
+R2
 !i10b 1
 !s100 LH?V[0eI=BMOIN<n<l[BB0
-IWYPkV4WQhKSh[nD?o7Nai0
+IZOcO;[1RMAUcod=]ib=e81
 R3
-Z18 !s105 fulladder32_sv_unit
+Z17 !s105 fulladder32_sv_unit
 S1
 R0
-R4
-Z19 8C:/Users/honga/Documents/cse469/lab3/fulladder32.sv
-Z20 FC:/Users/honga/Documents/cse469/lab3/fulladder32.sv
+Z18 w1681018820
+Z19 8C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder32.sv
+Z20 FC:/Users/Aaron Hong/Documents/cse469/lab3/fulladder32.sv
 L0 9
-R6
+R5
 r1
 !s85 0
 31
-Z21 !s108 1683517802.000000
-Z22 !s107 C:/Users/honga/Documents/cse469/lab3/fulladder32.sv|
-Z23 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/fulladder32.sv|
+R6
+Z21 !s107 C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder32.sv|
+Z22 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/fulladder32.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vfulladder32_testbench
 R1
-R17
+R2
 !i10b 1
 !s100 UzQULgRSBFVAc2Umnjo[]2
-IJNdjWg_ODeV^C6`>P94j<1
+IlgC@S1@N<c38UhQ0W83bh0
 R3
-R18
+R17
 S1
 R0
-R4
+R18
 R19
 R20
-Z24 L0 57
-R6
+Z23 L0 57
+R5
 r1
 !s85 0
 31
+R6
 R21
 R22
-R23
 !i113 1
+R7
 R8
 R9
-R10
 vfulladder_testbench
 R1
 R2
 !i10b 1
 !s100 I=IK:Ia<^Y:]TRB47B@Jn0
-Io[67oDX[WmRAXYf=N1nUb1
+IND;IHnDPP^^_UN@IC79IE3
 R3
-R12
+R11
 S1
 R0
-R4
+R12
 R13
 R14
 L0 20
-R6
+R5
 r1
 !s85 0
 31
-R7
+R6
 R15
 R16
 !i113 1
+R7
 R8
 R9
-R10
 vhazard_unit
 R1
-R2
+Z24 !s110 1683677997
 !i10b 1
-!s100 N9FjTZZkMJ37XnX7D]7X<1
-I;]7=VCPAPECDnb;fQmhXB2
+!s100 lj;A3=hJdmg4ikL83g=RM2
+I>1TAXoc=bchaB:4aBBjaR2
 R3
 !s105 hazard_unit_sv_unit
 S1
 R0
+w1683613456
+8C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv
 R4
-8C:/Users/honga/Documents/cse469/lab3/hazard_unit.sv
-FC:/Users/honga/Documents/cse469/lab3/hazard_unit.sv
 R5
-R6
 r1
 !s85 0
 31
-R7
-!s107 C:/Users/honga/Documents/cse469/lab3/hazard_unit.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/hazard_unit.sv|
+Z25 !s108 1683677997.000000
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/hazard_unit.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vimem
 R1
-!s110 1683517804
+R24
 !i10b 1
-!s100 [28JEdGYc^2]KnWmGd?l13
-I<IQc642lozcAV;;j=;OJ10
+!s100 XM1R^8^cfnT;^97G;[UbD1
+Il<a>UNi;TjSMC<ECdWBn60
 R3
 !s105 imem_sv_unit
 S1
 R0
-R4
-8C:/Users/honga/Documents/cse469/lab3/imem.sv
-FC:/Users/honga/Documents/cse469/lab3/imem.sv
+Z26 w1683677949
+8C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv
 L0 15
-R6
+R5
 r1
 !s85 0
 31
-!s108 1683517804.000000
-!s107 C:/Users/honga/Documents/cse469/lab3/imem.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/imem.sv|
+R25
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/imem.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vreg_file
 R1
-R17
+R2
 !i10b 1
 !s100 hSdz519EYz=>Qo<Y70_Vl3
-I8L7kz5EkOM:QH<]U7UTK11
+IO<_S0Gk8[6f<C<Dg<AZ^Z3
 R3
 !s105 reg_file_sv_unit
 S1
 R0
+w1683589593
+8C:/Users/Aaron Hong/Documents/cse469/lab3/reg_file.sv
+FC:/Users/Aaron Hong/Documents/cse469/lab3/reg_file.sv
 R4
-8C:/Users/honga/Documents/cse469/lab3/reg_file.sv
-FC:/Users/honga/Documents/cse469/lab3/reg_file.sv
 R5
-R6
 r1
 !s85 0
 31
-R21
-!s107 C:/Users/honga/Documents/cse469/lab3/reg_file.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/reg_file.sv|
+R6
+!s107 C:/Users/Aaron Hong/Documents/cse469/lab3/reg_file.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/reg_file.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vtestbench
 R1
-R17
+R2
 !i10b 1
 !s100 3;<g];^MagbNXdPU[2nz<0
-IG<IGOgBooCSaI<oVf33Hz3
+I<e2i95QFFXd>1J?FNNzRZ1
 R3
-Z25 !s105 top_sv_unit
+Z27 !s105 top_sv_unit
 S1
 R0
-R4
-Z26 8C:/Users/honga/Documents/cse469/lab3/top.sv
-Z27 FC:/Users/honga/Documents/cse469/lab3/top.sv
-R24
-R6
+R26
+Z28 8C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv
+Z29 FC:/Users/Aaron Hong/Documents/cse469/lab3/top.sv
+R23
+R5
 r1
 !s85 0
 31
-R21
-Z28 !s107 C:/Users/honga/Documents/cse469/lab3/top.sv|
-Z29 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/honga/Documents/cse469/lab3|C:/Users/honga/Documents/cse469/lab3/top.sv|
+R6
+Z30 !s107 C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv|
+Z31 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Aaron Hong/Documents/cse469/lab3|C:/Users/Aaron Hong/Documents/cse469/lab3/top.sv|
 !i113 1
+R7
 R8
 R9
-R10
 vtop
 R1
-R17
+R2
 !i10b 1
 !s100 6X6T21d]QNM;H;KA;UXh62
-Ih^7C]fgjL63[>NgRC9PL]3
+IY692]7MHDz`el;W>f9LJz1
 R3
-R25
+R27
 S1
 R0
-R4
 R26
-R27
+R28
+R29
 L0 9
-R6
+R5
 r1
 !s85 0
 31
-R21
-R28
-R29
+R6
+R30
+R31
 !i113 1
+R7
 R8
 R9
-R10

@@ -3,33 +3,34 @@
 //5/3/23
 //EE469 Lab3
 
-//This module creates an asynchronous, two read port, one write port, 16x32 register file.
+//This module creates an asynchronous hazard unit that outputs stalling, flushing, and forwarding control signals.
 
-//Inputs: Two 1-bits clk (clock signal), wr_en (write enable), three 4-bits write_addr, read_addr1,
-//read_addr2 (write and read addresses), one 32-bit write_data (data to be written at given write address).
-//Outputs: Two 32-bits read_data1, read_data2 (data read from given read addresses).
 module hazard_unit (
 	input logic Match_1E_M, Match_2E_M,
 	input logic Match_1E_W, Match_2E_W,
 	input logic Match_12D_E,
-	input logic RegWriteM, RegWriteW, MemtoRegE,
+	input logic RegWriteM, RegWriteW, MemtoRegE, BranchTakenE, PCWrPendingF, PCSrcW,
 	output logic [1:0] ForwardAE, ForwardBE, 
-	output logic ldrStallD
+	output logic StallF, StallD, FlushD, FlushE
 	);
 	
+	logic ldrStallD;
 	
+	assign ldrStallD = Match_12D_E & MemtoRegE;
 	
-	assign ldrstallD = Match_12D_E && MemtoRegE;
-	
+	assign StallF = ldrStallD + PCWrPendingF;
+	assign FlushD = PCWrPendingF + PCSrcW + BranchTakenE;
+	assign FlushE = ldrStallD + BranchTakenE;
+	assign StallD = ldrStallD;
 	
 	always_comb begin
-		if 	  (Match_1E_M && RegWriteM) ForwardAE = 10;
-		else if (Match_1E_W && RegWriteW) ForwardAE = 01;
-		else 										 ForwardAE = 00;
+		if 	  (Match_1E_M && RegWriteM) ForwardAE = 2'b10;
+		else if (Match_1E_W && RegWriteW) ForwardAE = 2'b01;
+		else 										 ForwardAE = 2'b00;
 		
-		if 	  (Match_2E_M && RegWriteM) ForwardBE = 10;
-		else if (Match_2E_W && RegWriteW) ForwardBE = 01;
-		else 										 ForwardBE = 00;
+		if 	  (Match_2E_M && RegWriteM) ForwardBE = 2'b10;
+		else if (Match_2E_W && RegWriteW) ForwardBE = 2'b01;
+		else 										 ForwardBE = 2'b00;
 	end
 					
 endmodule
